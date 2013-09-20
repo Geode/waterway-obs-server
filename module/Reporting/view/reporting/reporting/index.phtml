@@ -1,0 +1,75 @@
+<?php
+// module/Reporting/view/reporting/reporting/index.phtml:
+
+$title = 'Waterway obstructions\'s reportings';
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<p>
+    <a href="<?php echo $this->url('reporting', array('action'=>'add'));?>">Report a new obstruction</a>
+    <?php
+	    echo $this->paginationControl(
+		    // the paginator object
+		    $reportings,
+		    // the scrolling style; see http://zf2.readthedocs.org/en/release-2.1.4/modules/zend.paginator.usage.html#rendering-pages-with-view-scripts
+		    'sliding',
+		    // the partial to use to render the control
+		    array('partial/pagination.phtml', 'Reporting'),
+		    // the route to link to when a user clicks a control link
+		    array(
+		        'route' => 'reporting',
+				'order' => str_replace(" ","_",$order),
+		    )
+		);  
+    ?>
+</p>
+
+<table class="table">
+<tr>
+    <th>id <a href="<?php echo $this->url('reporting'); ?>1/id_DESC">&#x25B2;</a> <a href="<?php echo $this->url('reporting'); ?>1/id_ASC">&#x25BC;</a></th>
+    <th>GPS</th>
+    <th>Category <a href="<?php echo $this->url('reporting'); ?>1/feature_DESC">&#x25B2;</a> <a href="<?php echo $this->url('reporting'); ?>1/feature_ASC">&#x25BC;</a></th>
+    <th>Obstruction type <a href="<?php echo $this->url('reporting'); ?>1/type_DESC">&#x25B2;</a> <a href="<?php echo $this->url('reporting'); ?>1/type_ASC">&#x25BC;</a></th>
+    <th>Fish can pass?</th>
+    <th>Fish pass type</th>
+    <th>Image</th>
+    <th>actions</th>
+</tr>
+<?php foreach ($reportings as $reporting) : ?>
+<tr>
+    <td><?php echo $this->escapeHtml($reporting->id);?></td>
+    <td><?php echo $this->escapeHtml($reporting->x);?>, <?php echo $this->escapeHtml($reporting->y);?></td>
+    <td><?php echo $this->escapeHtml($reporting->feature);?></td>
+    <td><?php echo $this->escapeHtml($reporting->type);?></td>
+    <td><?php echo $this->escapeHtml($reporting->fishpass);?></td>
+    <td><?php echo $this->escapeHtml($reporting->fishpasstype);?></td>
+    <td>
+    	<?php if ($this->escapeHtml($reporting->file_name) == "") { ?>
+    		no image
+    	<?php } else { ?>
+    		<a href="<?php echo $this->basePath() . '/obstructions/' . $this->escapeHtml($reporting->file_name);?>" target="_blank">Image</a>
+    	<?php } ?>
+    </td>
+    <td>
+        <a href="<?php echo $this->url('reporting',
+            array('action'=>'edit', 'id' => $reporting->id));?>">Edit</a>
+        <a href="<?php echo $this->url('reporting',
+            array('action'=>'delete', 'id' => $reporting->id));?>">Delete</a>
+    </td>
+</tr>
+<?php endforeach; ?>
+</table>
+<?php 
+echo $this->paginationControl(
+    // the paginator object
+    $reportings,
+    // the scrolling style; see http://zf2.readthedocs.org/en/release-2.1.4/modules/zend.paginator.usage.html#rendering-pages-with-view-scripts
+    'sliding',
+    // the partial to use to render the control
+    array('partial/pagination.phtml', 'Reporting'),
+    // the route to link to when a user clicks a control link
+    array(
+        'route' => 'reporting',
+		'order' => str_replace(" ","_",$order),
+    )
+);

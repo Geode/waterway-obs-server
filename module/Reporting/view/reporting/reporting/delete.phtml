@@ -1,0 +1,23 @@
+<?php
+$title = 'Delete a reporting';
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+
+<p>Are you sure that you want to delete the reporting id <?php echo $this->escapeHtml($reporting->id); ?>
+    (<?php echo $this->escapeHtml($reporting->x); ?>,
+    <?php echo $this->escapeHtml($reporting->y); ?>)?
+</p>
+<?php
+$url = $this->url('reporting', array(
+    'action' => 'delete',
+    'id'     => $this->id,
+));
+?>
+<form action="<?php echo $url; ?>" method="post">
+<div>
+    <input type="hidden" name="id" value="<?php echo (int) $reporting->id; ?>" />
+    <input type="submit" name="del" value="Yes" />
+    <input type="submit" name="del" value="No" />
+</div>
+</form>
