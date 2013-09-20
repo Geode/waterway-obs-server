@@ -58,13 +58,15 @@
             -->
           </div>
           <div data-role="content">
-			<form action="/reporting/add" method="post" id="form" data-transition="flow" data-rel="dialog" data-ajax="false">
+			<form action="/reporting/add" method="post" id="form" data-transition="flow" data-rel="dialog" enctype="multipart/form-data" data-ajax="false">
 			   <h3>Report Obstructions PROTO</h3>
 			   
 			   <div data-role="fieldcontain">
 			   		<label for="camera_btn">Take Picture</label>
 			   		<a href="#" data-role="button" data-inline="true" data-mini="true" id="camera_btn">Take Picture</a>
-			   		<input type="text" name="image-file" id="basic" value="" data-mini="true" />
+			   		<!-- <input type="text" name="image-file" id="basic" value="" data-mini="true" />  -->
+			   		<input type="file" name="image-file" />
+			   		
 			   </div>
 
 			   <div data-role="fieldcontain">

@@ -28,6 +28,7 @@ function fixContentHeight() {
     }
 }
 
+/*
 $('form').live('submit', function (e) {
     var $this = $(this);
 
@@ -45,6 +46,7 @@ $('form').live('submit', function (e) {
     }, 'json');//you can set the response data-type as well
 });
 // one-time initialisation of button handlers 
+*/
 
 $("#plus").live('click', function(){
     map.zoomIn();
