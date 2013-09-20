@@ -65,9 +65,7 @@ var init = function (onSelectFeatureFunction) {
                     enableKinetic: true
                 }
             }),
-            geolocate,
-            selectControl,
-            clickinfo
+            geolocate
         ],
         layers: [
             new OpenLayers.Layer.OSM("OpenStreetMap", null, {
