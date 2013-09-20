@@ -30,10 +30,9 @@ var init = function (onSelectFeatureFunction) {
 
 
  	var obstructionWms = new OpenLayers.Layer.WMS(
-                    "cite:obstruction - Tiled", "http://localhost:8080/geoserver/cite/wms",
+                    "cite:obstruction - Tiled", "http://water-geode.rhcloud.com/cite/wms",
                     {
-                        //LAYERS: 'cite:confirmed_report_data',
-                        LAYERS: 'cite:confirmed_report_data',
+                        LAYERS: 'cite:obstruction',
                         STYLES: '',
                         tiled: true,
                         transparent: true
@@ -46,10 +45,10 @@ var init = function (onSelectFeatureFunction) {
             );
             
     var clickinfo = new OpenLayers.Control.WMSGetFeatureInfo({
-            url: 'http://localhost:8080/geoserver/cite/wms', 
+            url: "http://water-geode.rhcloud.com/cite/wms", 
         	title: 'Identify features by clicking',
             layers: [obstructionWms],
-            hover: true,
+            hover: false,
         	queryVisible: true
     }); 
     /*
@@ -104,9 +103,9 @@ var init = function (onSelectFeatureFunction) {
             }),
             obstructionWms,
              new OpenLayers.Layer.WMS(
-                    "cite:obstruction - Tiled", "http://localhost:8080/geoserver/cite/wms",
+                    "cite:obstruction_report", "http://water-geode.rhcloud.com/cite/wms",
                     {
-                        LAYERS: 'cite:obstruction',
+                        LAYERS: 'cite:obstruction_report',
                         STYLES: '',
                         tiled: true,
                         transparent: true
