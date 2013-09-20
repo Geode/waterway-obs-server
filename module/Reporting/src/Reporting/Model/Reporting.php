@@ -107,7 +107,7 @@ class Reporting implements InputFilterAwareInterface
 							array(
 									'name'    => 'Between',
 									'options' => array(
-											'min'      => 0,
+											'min'      => -360,
 											'max'      => 360,
 									),
 							),
@@ -125,7 +125,7 @@ class Reporting implements InputFilterAwareInterface
 							array(
 									'name'    => 'Between',
 									'options' => array(
-											'min'      => 0,
+											'min'      => -360,
 											'max'      => 360,
 									),
 							),

@@ -54,9 +54,10 @@ class ReportingController extends AbstractActionController
             	$myFormData = $form->getData();
                 //image stuff:
                 $imageFile = $post['image-file'];
-                if ($imageFile['error'] == 4)
+                if ($imageFile == "" || $imageFile['error'] >= 1 || $imageFile['tmp_name'] == "")
                 {
                 	// no image uploaded
+			$filename ="";
                 }
                 else 
                 {
@@ -64,7 +65,7 @@ class ReportingController extends AbstractActionController
 	                {
 	                	if ($myFormData['submit-json'] != "")
 	                	{
-	                		$result = new JsonModel(array('result'=>false, 'msg'=>'Image upload error, perhaps image size is too large!'));
+	                		$result = new JsonModel(array('result'=>false, 'msg'=>'Image upload error, perhaps image size is too large!'.$imageFile['error']));
 	                		return $result;
 	                	}
 	                	else
