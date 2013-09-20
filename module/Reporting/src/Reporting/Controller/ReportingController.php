@@ -97,7 +97,7 @@ class ReportingController extends AbstractActionController
                 if ($myFormData['submit-json'] != "")
                 {
                 	$result = new JsonModel(array('result'=>true));
-                	return $result;
+            		//return $result;
                 }
                 
                 return $this->redirect()->toRoute('reporting');
