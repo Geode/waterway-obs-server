@@ -15,9 +15,9 @@ return array(
 
     'db' => array(
         'driver'         => 'Pdo',
-        'dsn'            => 'pgsql:host='.$_ENV['OPENSHIFT_POSTGRESQL_DB_HOST'].';port='.$_ENV['OPENSHIFT_POSTGRESQL_DB_PORT'].';dbname=water',
-        'username'       => $_ENV['OPENSHIFT_POSTGRESQL_DB_USERNAME'],
-        'password'       => $_ENV['OPENSHIFT_POSTGRESQL_DB_PASSWORD'],
+        'dsn'            => 'pgsql:host=localhost;dbname=waterway',
+        'username'       => 'admin',
+        'password'       => 'admin',
     ),
     // Whether or not to enable a configuration cache.
     // If enabled, the merged configuration will be cached and used in
