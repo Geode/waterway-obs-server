@@ -10,7 +10,7 @@ var sm = new OpenLayers.Projection("EPSG:900913");
 var init = function (onSelectFeatureFunction) {
 
     var vector = new OpenLayers.Layer.Vector("Vector Layer", {});
-
+    /*
     var obstructionsLayer = new OpenLayers.Layer.Vector("Obstructions", {
         styleMap: new OpenLayers.StyleMap({
             externalGraphic: "img/smallfish.png",
@@ -21,14 +21,14 @@ var init = function (onSelectFeatureFunction) {
         })
     });
 
-    var theobstructions = getFeatures();
+    //var theobstructions = getFeatures();
     obstructionsLayer.addFeatures(theobstructions);
 
     var selectControl = new OpenLayers.Control.SelectFeature(obstructionsLayer, {
         autoActivate:true,
         onSelect: onSelectFeatureFunction});
 
-
+   */
  	var obstructionWms = new OpenLayers.Layer.WMS(
                     "cite:obstruction - Tiled", "http://water-geode.rhcloud.com/cite/wms",
                     {
@@ -44,34 +44,6 @@ var init = function (onSelectFeatureFunction) {
                     } 
             );
             
-    var clickinfo = new OpenLayers.Control.WMSGetFeatureInfo({
-            url: "http://water-geode.rhcloud.com/cite/wms", 
-        	title: 'Identify features by clicking',
-            layers: [obstructionWms],
-            hover: false,
-        	queryVisible: true
-    }); 
-    /*
-        info = new OpenLayers.Control.WMSGetFeatureInfo({
-            url: 'http://demo.opengeo.org/geoserver/wms', 
-            title: 'Identify features by clicking',
-            queryVisible: true,
-            eventListeners: {
-                getfeatureinfo: function(event) {
-                    map.addPopup(new OpenLayers.Popup.FramedCloud(
-                        "chicken", 
-                        map.getLonLatFromPixel(event.xy),
-                        null,
-                        event.text,
-                        null,
-                        true
-                    ));
-                }
-            }
-        });
-        map.addControl(info);
-        info.activate(); 
-       */ 
     var geolocate = new OpenLayers.Control.Geolocate({
         id: 'locate-control',
         geolocationOptions: {
@@ -93,9 +65,7 @@ var init = function (onSelectFeatureFunction) {
                     enableKinetic: true
                 }
             }),
-            geolocate,
-            selectControl,
-            clickinfo
+            geolocate
         ],
         layers: [
             new OpenLayers.Layer.OSM("OpenStreetMap", null, {
@@ -105,7 +75,7 @@ var init = function (onSelectFeatureFunction) {
              new OpenLayers.Layer.WMS(
                     "cite:obstruction_report", "http://water-geode.rhcloud.com/cite/wms",
                     {
-                        LAYERS: 'cite:obstruction_report',
+                        LAYERS: 'cite:unconfirmed_report_data',
                         STYLES: '',
                         tiled: true,
                         transparent: true
@@ -142,14 +112,12 @@ var init = function (onSelectFeatureFunction) {
                 name: "Bing Aerial + Labels",
                 transitionEffect: 'resize'
             }),
-            vector,
-            obstructionsLayer
+            vector
         ],
         center: new OpenLayers.LonLat(-567207.4520074566,6501824.981972655),
         zoom: 8
     });
 	
-	clickinfo.activate();
     var style = {
         fillOpacity: 0.1,
         fillColor: '#000',
