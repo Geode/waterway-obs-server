@@ -26,6 +26,7 @@ $form->setAttribute('action', $this->url(
 		      	<?php $form->prepare(); ?>
 			  	<?php echo $this->form()->openTag($form); ?>
 		        <div class=".col-xs-6 .col-sm-4 .col-lg-4">
+		        <?php
 							echo "<br />".$this->formHidden($form->get('id'));
 							echo "<br />".$this->formRow($form->get('x'));
 							echo "<br />".$this->formRow($form->get('y'));
@@ -36,9 +37,11 @@ $form->setAttribute('action', $this->url(
 							echo "<br />".$this->formRow($form->get('fishpass'));
 							echo "<br />".$this->formRow($form->get('fishpasstype'));
 							echo "<br />".$this->formRow($form->get('fishpass_info'));
-							echo "<br />".$this->formRow($form->get('porosity_sal'));		        	
+							echo "<br />".$this->formRow($form->get('porosity_sal'));
+				?>		        	
 		        </div>
 		        <div class=".col-xs-6 .col-sm-4 .col-lg-4">
+		        <?php 
 							echo "<br />".$this->formRow($form->get('porosity_trout'));
 							echo "<br />".$this->formRow($form->get('porosity_gray'));
 							echo "<br />".$this->formRow($form->get('porosity_rlamp'));
@@ -49,7 +52,8 @@ $form->setAttribute('action', $this->url(
 							echo "<br />".$this->formRow($form->get('local_head_drop'));
 							echo "<br />".$this->formRow($form->get('porosity_info'));
 							echo "<br />".$this->formRow($form->get('file_name'));
-							echo "<br />".$this->formSubmit($form->get('submit'));		        	
+							echo "<br />".$this->formSubmit($form->get('submit'));
+							?>
 		        </div>
 		        <?php  echo $this->form()->closeTag(); ?>
 		        <div class=".col-xs-6 .col-sm-4 .col-lg-4">
