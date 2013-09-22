@@ -88,6 +88,7 @@ class ReportingController extends AbstractActionController
 	                }
 	                $filename = date("Y-m-d_H-i-s").".jpg";
 	                move_uploaded_file($imageFile['tmp_name'], "public/obstructions/" . $filename);
+	                //move_uploaded_file($imageFile['tmp_name'], $_ENV['OPENSHIFT_DATA_DIR'] . "images/" . $filename);
                 }
                 //@todo: manage errors in a json way:
             	$insert_view->exchangeArray($form->getData());

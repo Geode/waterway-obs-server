@@ -14,7 +14,9 @@
 return array(
     'db' => array(
         'driver'         => 'Pdo',
-        'dsn'            => 'pgsql:host=localhost;dbname=water',
+        'dsn'            => 'pgsql:host='.$_ENV['OPENSHIFT_POSTGRESQL_DB_HOST'].';port='.$_ENV['OPENSHIFT_POSTGRESQL_DB_PORT'].';dbname=water',
+        'username'       => $_ENV['OPENSHIFT_POSTGRESQL_DB_USERNAME'],
+        'password'       => $_ENV['OPENSHIFT_POSTGRESQL_DB_PASSWORD'],
     ),
     'service_manager' => array(
         'factories' => array(
