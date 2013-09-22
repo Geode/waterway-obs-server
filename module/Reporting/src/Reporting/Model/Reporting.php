@@ -37,13 +37,14 @@ class Reporting implements InputFilterAwareInterface
 	public $y;
 		
 	protected $inputFilter;
-
+	protected $editFilter;
+	
 	public function exchangeArray($data)
 	{
 		$this->id     = (!empty($data['id'])) ? $data['id'] : null;
 		$this->x = (!empty($data['x'])) ? $data['x'] : null;
 		$this->y  = (!empty($data['y'])) ? $data['y'] : null;
-		
+		//throw new \Exception("Who wants that!!!!!");
 		$this->feature  = (!empty($data['feature'])) ? $data['feature'] : null;
 		$this->type  = (!empty($data['type'])) ? $data['type'] : null;
 		$this->name  = (!empty($data['name'])) ? $data['name'] : null;
@@ -86,19 +87,40 @@ class Reporting implements InputFilterAwareInterface
 	public function getInputFilter()
 	{
 		if (!$this->inputFilter) {
-			$inputFilter = new InputFilter();
+			$this->inputFilter = $this->getFilter(false);
+		}
+		return $this->inputFilter;
+	}
 	
-			$inputFilter->add(array(
-					'name'     => 'id',
-					'required' => true,
-					'filters'  => array(
-							array('name' => 'Int'),
-					),
-			));
+	public function getEditFilter()
+	{
+		if (!$this->editFilter) {
+			$this->editFilter = $this->getFilter(true);
+		}
+		//dont know why but isValid method from form will ask inputFilters, workaround here (to delete when fixed) :
+		$this->inputFilter = $this->editFilter;
+		return $this->editFilter;
+	}
 	
+	
+	private function getFilter($edit)
+	{
+		$inputFilter = new InputFilter();
+
+		$inputFilter->add(array(
+				'name'     => 'id',
+				'required' => true,
+				'filters'  => array(
+						array('name' => 'Int'),
+				),
+		));
+
+		//only when adding data :
+		if ($edit == false)
+		{
 			$inputFilter->add(array(
 					'name'     => 'x',
-					'required' => true,
+					'required' => false,
 					'filters'  => array(
 							array('name' => 'StripTags'),
 							array('name' => 'StringTrim'),
@@ -116,7 +138,7 @@ class Reporting implements InputFilterAwareInterface
 	
 			$inputFilter->add(array(
 					'name'     => 'y',
-					'required' => true,
+					'required' => false,
 					'filters'  => array(
 							array('name' => 'StripTags'),
 							array('name' => 'StringTrim'),
@@ -131,313 +153,310 @@ class Reporting implements InputFilterAwareInterface
 							),
 					),
 			));
-
-			$inputFilter->add(array(
-					'name'     => 'feature',
-					'required' => false,
-					'filters'  => array(
-							array('name' => 'StripTags'),
-							array('name' => 'StringTrim'),
-					),
-					'validators' => array(
-							array(
-									'name'    => 'StringLength',
-									'options' => array(
-											'encoding' => 'UTF-8',
-											'min'      => 0,
-											'max'      => 255,
-									),
-							),
-					),
-			));
-
-			$inputFilter->add(array(
-					'name'     => 'name',
-					'required' => false,
-					'filters'  => array(
-							array('name' => 'StripTags'),
-							array('name' => 'StringTrim'),
-					),
-					'validators' => array(
-							array(
-									'name'    => 'StringLength',
-									'options' => array(
-											'encoding' => 'UTF-8',
-											'min'      => 0,
-											'max'      => 255,
-									),
-							),
-					),
-			));
-			
-
-			$inputFilter->add(array(
-					'name'     => 'location_info',
-					'required' => false,
-					'filters'  => array(
-							array('name' => 'StripTags'),
-							array('name' => 'StringTrim'),
-					),
-					'validators' => array(
-							array(
-									'name'    => 'StringLength',
-									'options' => array(
-											'encoding' => 'UTF-8',
-											'min'      => 0,
-											'max'      => 2048,
-									),
-							),
-					),
-			));
-
-			$inputFilter->add(array(
-					'name'     => 'fishpass',
-					'required' => false,
-					'filters'  => array(
-							array('name' => 'StripTags'),
-							array('name' => 'StringTrim'),
-					),
-					'validators' => array(
-							array(
-									'name'    => 'StringLength',
-									'options' => array(
-											'encoding' => 'UTF-8',
-											'min'      => 0,
-											'max'      => 1,
-									),
-							),
-					),
-			));
-			
-
-			$inputFilter->add(array(
-					'name'     => 'fishpasstype',
-					'required' => false,
-					'filters'  => array(
-							array('name' => 'StripTags'),
-							array('name' => 'StringTrim'),
-					),
-					'validators' => array(
-							array(
-									'name'    => 'StringLength',
-									'options' => array(
-											'encoding' => 'UTF-8',
-											'min'      => 0,
-											'max'      => 255,
-									),
-							),
-					),
-			));
-			
-
-			$inputFilter->add(array(
-					'name'     => 'fishpass_info',
-					'required' => false,
-					'filters'  => array(
-							array('name' => 'StripTags'),
-							array('name' => 'StringTrim'),
-					),
-					'validators' => array(
-							array(
-									'name'    => 'StringLength',
-									'options' => array(
-											'encoding' => 'UTF-8',
-											'min'      => 0,
-											'max'      => 2048,
-									),
-							),
-					),
-			));
-			
-			$inputFilter->add(array(
-					'name'     => 'porosity_sal',
-					'required' => false,
-					'filters'  => array(
-							array('name' => 'StripTags'),
-							array('name' => 'StringTrim'),
-					),
-					'validators' => array(
-							array(
-									'name'    => 'StringLength',
-									'options' => array(
-											'encoding' => 'UTF-8',
-											'min'      => 0,
-											'max'      => 255,
-									),
-							),
-					),
-			));
-			
-
-			$inputFilter->add(array(
-					'name'     => 'porosity_trout',
-					'required' => false,
-					'filters'  => array(
-							array('name' => 'StripTags'),
-							array('name' => 'StringTrim'),
-					),
-					'validators' => array(
-							array(
-									'name'    => 'StringLength',
-									'options' => array(
-											'encoding' => 'UTF-8',
-											'min'      => 0,
-											'max'      => 255,
-									),
-							),
-					),
-			));
-			
-
-			$inputFilter->add(array(
-					'name'     => 'porosity_gray',
-					'required' => false,
-					'filters'  => array(
-							array('name' => 'StripTags'),
-							array('name' => 'StringTrim'),
-					),
-					'validators' => array(
-							array(
-									'name'    => 'StringLength',
-									'options' => array(
-											'encoding' => 'UTF-8',
-											'min'      => 0,
-											'max'      => 255,
-									),
-							),
-					),
-			));
-			
-
-			$inputFilter->add(array(
-					'name'     => 'porosity_rlamp',
-					'required' => false,
-					'filters'  => array(
-							array('name' => 'StripTags'),
-							array('name' => 'StringTrim'),
-					),
-					'validators' => array(
-							array(
-									'name'    => 'StringLength',
-									'options' => array(
-											'encoding' => 'UTF-8',
-											'min'      => 0,
-											'max'      => 255,
-									),
-							),
-					),
-			));
-			
-
-			$inputFilter->add(array(
-					'name'     => 'porosity_slamp',
-					'required' => false,
-					'filters'  => array(
-							array('name' => 'StripTags'),
-							array('name' => 'StringTrim'),
-					),
-					'validators' => array(
-							array(
-									'name'    => 'StringLength',
-									'options' => array(
-											'encoding' => 'UTF-8',
-											'min'      => 0,
-											'max'      => 255,
-									),
-							),
-					),
-			));
-			
-
-			$inputFilter->add(array(
-					'name'     => 'porosity_eel',
-					'required' => false,
-					'filters'  => array(
-							array('name' => 'StripTags'),
-							array('name' => 'StringTrim'),
-					),
-					'validators' => array(
-							array(
-									'name'    => 'StringLength',
-									'options' => array(
-											'encoding' => 'UTF-8',
-											'min'      => 0,
-											'max'      => 255,
-									),
-							),
-					),
-			));
-						
-			$inputFilter->add(array(
-					'name'     => 'porosity_cyp',
-					'required' => false,
-					'filters'  => array(
-							array('name' => 'StripTags'),
-							array('name' => 'StringTrim'),
-					),
-					'validators' => array(
-							array(
-									'name'    => 'StringLength',
-									'options' => array(
-											'encoding' => 'UTF-8',
-											'min'      => 0,
-											'max'      => 255,
-									),
-							),
-					),
-			));
-				
-			$inputFilter->add(array(
-					'name'     => 'porosity_judgement',
-					'required' => false,
-					'filters'  => array(
-							array('name' => 'StripTags'),
-							array('name' => 'StringTrim'),
-					),
-					'validators' => array(
-							array(
-									'name'    => 'StringLength',
-									'options' => array(
-											'encoding' => 'UTF-8',
-											'min'      => 0,
-											'max'      => 255,
-									),
-							),
-					),
-			));
-				
-			$inputFilter->add(array(
-					'name'     => 'local_head_drop',
-					'required' => false,
-					'filters'  => array(
-							array('name' => 'StripTags'),
-							array('name' => 'StringTrim'),
-					),
-			));
-				
-			$inputFilter->add(array(
-					'name'     => 'porosity_info',
-					'required' => false,
-					'filters'  => array(
-							array('name' => 'StripTags'),
-							array('name' => 'StringTrim'),
-					),
-					'validators' => array(
-							array(
-									'name'    => 'StringLength',
-									'options' => array(
-											'encoding' => 'UTF-8',
-											'min'      => 0,
-											'max'      => 2048,
-									),
-							),
-					),
-			));
-					
-				
-			$this->inputFilter = $inputFilter;
 		}
+		
+		$inputFilter->add(array(
+				'name'     => 'feature',
+				'required' => false,
+				'filters'  => array(
+						array('name' => 'StripTags'),
+						array('name' => 'StringTrim'),
+				),
+				'validators' => array(
+						array(
+								'name'    => 'StringLength',
+								'options' => array(
+										'encoding' => 'UTF-8',
+										'min'      => 0,
+										'max'      => 255,
+								),
+						),
+				),
+		));
+
+		$inputFilter->add(array(
+				'name'     => 'name',
+				'required' => false,
+				'filters'  => array(
+						array('name' => 'StripTags'),
+						array('name' => 'StringTrim'),
+				),
+				'validators' => array(
+						array(
+								'name'    => 'StringLength',
+								'options' => array(
+										'encoding' => 'UTF-8',
+										'min'      => 0,
+										'max'      => 255,
+								),
+						),
+				),
+		));
+		
+
+		$inputFilter->add(array(
+				'name'     => 'location_info',
+				'required' => false,
+				'filters'  => array(
+						array('name' => 'StripTags'),
+						array('name' => 'StringTrim'),
+				),
+				'validators' => array(
+						array(
+								'name'    => 'StringLength',
+								'options' => array(
+										'encoding' => 'UTF-8',
+										'min'      => 0,
+										'max'      => 2048,
+								),
+						),
+				),
+		));
+
+		$inputFilter->add(array(
+				'name'     => 'fishpass',
+				'required' => false,
+				'filters'  => array(
+						array('name' => 'StripTags'),
+						array('name' => 'StringTrim'),
+				),
+				'validators' => array(
+						array(
+								'name'    => 'StringLength',
+								'options' => array(
+										'encoding' => 'UTF-8',
+										'min'      => 0,
+										'max'      => 1,
+								),
+						),
+				),
+		));
+		
+
+		$inputFilter->add(array(
+				'name'     => 'fishpasstype',
+				'required' => false,
+				'filters'  => array(
+						array('name' => 'StripTags'),
+						array('name' => 'StringTrim'),
+				),
+				'validators' => array(
+						array(
+								'name'    => 'StringLength',
+								'options' => array(
+										'encoding' => 'UTF-8',
+										'min'      => 0,
+										'max'      => 255,
+								),
+						),
+				),
+		));
+		
+
+		$inputFilter->add(array(
+				'name'     => 'fishpass_info',
+				'required' => false,
+				'filters'  => array(
+						array('name' => 'StripTags'),
+						array('name' => 'StringTrim'),
+				),
+				'validators' => array(
+						array(
+								'name'    => 'StringLength',
+								'options' => array(
+										'encoding' => 'UTF-8',
+										'min'      => 0,
+										'max'      => 2048,
+								),
+						),
+				),
+		));
+		
+		$inputFilter->add(array(
+				'name'     => 'porosity_sal',
+				'required' => false,
+				'filters'  => array(
+						array('name' => 'StripTags'),
+						array('name' => 'StringTrim'),
+				),
+				'validators' => array(
+						array(
+								'name'    => 'StringLength',
+								'options' => array(
+										'encoding' => 'UTF-8',
+										'min'      => 0,
+										'max'      => 255,
+								),
+						),
+				),
+		));
+		
+
+		$inputFilter->add(array(
+				'name'     => 'porosity_trout',
+				'required' => false,
+				'filters'  => array(
+						array('name' => 'StripTags'),
+						array('name' => 'StringTrim'),
+				),
+				'validators' => array(
+						array(
+								'name'    => 'StringLength',
+								'options' => array(
+										'encoding' => 'UTF-8',
+										'min'      => 0,
+										'max'      => 255,
+								),
+						),
+				),
+		));
+		
+
+		$inputFilter->add(array(
+				'name'     => 'porosity_gray',
+				'required' => false,
+				'filters'  => array(
+						array('name' => 'StripTags'),
+						array('name' => 'StringTrim'),
+				),
+				'validators' => array(
+						array(
+								'name'    => 'StringLength',
+								'options' => array(
+										'encoding' => 'UTF-8',
+										'min'      => 0,
+										'max'      => 255,
+								),
+						),
+				),
+		));
+		
+
+		$inputFilter->add(array(
+				'name'     => 'porosity_rlamp',
+				'required' => false,
+				'filters'  => array(
+						array('name' => 'StripTags'),
+						array('name' => 'StringTrim'),
+				),
+				'validators' => array(
+						array(
+								'name'    => 'StringLength',
+								'options' => array(
+										'encoding' => 'UTF-8',
+										'min'      => 0,
+										'max'      => 255,
+								),
+						),
+				),
+		));
+		
+
+		$inputFilter->add(array(
+				'name'     => 'porosity_slamp',
+				'required' => false,
+				'filters'  => array(
+						array('name' => 'StripTags'),
+						array('name' => 'StringTrim'),
+				),
+				'validators' => array(
+						array(
+								'name'    => 'StringLength',
+								'options' => array(
+										'encoding' => 'UTF-8',
+										'min'      => 0,
+										'max'      => 255,
+								),
+						),
+				),
+		));
+		
+
+		$inputFilter->add(array(
+				'name'     => 'porosity_eel',
+				'required' => false,
+				'filters'  => array(
+						array('name' => 'StripTags'),
+						array('name' => 'StringTrim'),
+				),
+				'validators' => array(
+						array(
+								'name'    => 'StringLength',
+								'options' => array(
+										'encoding' => 'UTF-8',
+										'min'      => 0,
+										'max'      => 255,
+								),
+						),
+				),
+		));
+					
+		$inputFilter->add(array(
+				'name'     => 'porosity_cyp',
+				'required' => false,
+				'filters'  => array(
+						array('name' => 'StripTags'),
+						array('name' => 'StringTrim'),
+				),
+				'validators' => array(
+						array(
+								'name'    => 'StringLength',
+								'options' => array(
+										'encoding' => 'UTF-8',
+										'min'      => 0,
+										'max'      => 255,
+								),
+						),
+				),
+		));
+			
+		$inputFilter->add(array(
+				'name'     => 'porosity_judgement',
+				'required' => false,
+				'filters'  => array(
+						array('name' => 'StripTags'),
+						array('name' => 'StringTrim'),
+				),
+				'validators' => array(
+						array(
+								'name'    => 'StringLength',
+								'options' => array(
+										'encoding' => 'UTF-8',
+										'min'      => 0,
+										'max'      => 255,
+								),
+						),
+				),
+		));
+			
+		$inputFilter->add(array(
+				'name'     => 'local_head_drop',
+				'required' => false,
+				'filters'  => array(
+						array('name' => 'StripTags'),
+						array('name' => 'StringTrim'),
+				),
+		));
+			
+		$inputFilter->add(array(
+				'name'     => 'porosity_info',
+				'required' => false,
+				'filters'  => array(
+						array('name' => 'StripTags'),
+						array('name' => 'StringTrim'),
+				),
+				'validators' => array(
+						array(
+								'name'    => 'StringLength',
+								'options' => array(
+										'encoding' => 'UTF-8',
+										'min'      => 0,
+										'max'      => 2048,
+								),
+						),
+				),
+		));
 	
-		return $this->inputFilter;
+		return $inputFilter;
 	}
 }

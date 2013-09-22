@@ -84,6 +84,7 @@ class ReportingTable
 			$this->tableGateway->insert($data);
 		} else {
 			if ($this->getreporting($id)) {
+				//pop x and y elements
 				$this->tableGateway->update($data, array('id' => $id));
 			} else {
 				throw new \Exception('Reporting id does not exist');

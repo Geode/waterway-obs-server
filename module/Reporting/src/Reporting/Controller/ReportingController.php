@@ -139,18 +139,18 @@ class ReportingController extends AbstractActionController
         $form  = new ReportingForm();
         $form->bind($reporting);
         $form->get('submit')->setAttribute('value', 'Edit');
-
         $request = $this->getRequest();
         if ($request->isPost()) {
-            $form->setInputFilter($reporting->getInputFilter());
+        	$form->setInputFilter($reporting->getEditFilter());
             $form->setData($request->getPost());
 
             if ($form->isValid()) {
                 $this->getReportingTable()->saveReporting($reporting);
 
-                // Redirect to list of albums
+                // Redirect to list
                 return $this->redirect()->toRoute('reporting');
             }
+
         }
 
         return array(
