@@ -1,8 +1,6 @@
 Waterway obstructions
 =======================
 
-<<<<<<< HEAD
-
 Developpment done on the GeoHack / Hackathon FOSS4G 2013.
 
 An simple application : mobile / phonegap with a server side Zend Framework 2.x, GeoServer and PostGIS.
@@ -25,7 +23,6 @@ Mandy (mandy.beasley@environment-agency.gov.uk)
 
 Jim Gregory (jim.gregory@environment-agency.gov.uk)
 
-=======
-to be used with mobile side and database :
 
->>>>>>> b5fab9d... Update README.md
+
+
