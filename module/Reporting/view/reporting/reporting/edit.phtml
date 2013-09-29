@@ -1,73 +1,30 @@
 <?php
 $title = 'Edit an obstruction reporting';
-$this->headTitle($title);
+$this->headTitle ( $title );
 ?>
 <h1><?php echo $this->escapeHtml($title); ?></h1>
 
 <?php
-$form = $this->form;
-$form->setAttribute('action', $this->url(
-    'reporting',
-    array(
-        'action' => 'edit',
-        'id'     => $this->id,
-    )
-));
+echo $this->partial ( 'partial/form-partial', array (
+		'form' => $this->form,
+		'url' => $this->url ( 'reporting', array (
+				'action' => 'edit',
+				'id' => $this->id 
+		) ) 
+) );
 ?>
-<div class="row">
-    <div class="col">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title"><?php echo $this->translate('Obstruction'); ?> :</h3>
-            </div>
-            <div class="panel-body">
-		      <p></p>		      						
-		      <div class="row">
-		      	<?php $form->prepare(); ?>
-			  	<?php echo $this->form()->openTag($form); ?>
-		        <div class=".col-xs-6 .col-sm-4 .col-lg-4">
-		        <?php
-							echo "<br />".$this->formHidden($form->get('id'));
-							echo "<br />".$this->formRow($form->get('x'));
-							echo "<br />".$this->formRow($form->get('y'));
-							echo "<br />".$this->formRow($form->get('feature'));
-							echo "<br />".$this->formRow($form->get('type'));
-							echo "<br />".$this->formRow($form->get('name'));
-							echo "<br />".$this->formRow($form->get('location_info'));
-							echo "<br />".$this->formRow($form->get('fishpass'));
-							echo "<br />".$this->formRow($form->get('fishpasstype'));
-							echo "<br />".$this->formRow($form->get('fishpass_info'));
-							echo "<br />".$this->formRow($form->get('porosity_sal'));
-				?>		        	
-		        </div>
-		        <div class=".col-xs-6 .col-sm-4 .col-lg-4">
-		        <?php 
-							echo "<br />".$this->formRow($form->get('porosity_trout'));
-							echo "<br />".$this->formRow($form->get('porosity_gray'));
-							echo "<br />".$this->formRow($form->get('porosity_rlamp'));
-							echo "<br />".$this->formRow($form->get('porosity_slamp'));
-							echo "<br />".$this->formRow($form->get('porosity_eel'));
-							echo "<br />".$this->formRow($form->get('porosity_cyp'));
-							echo "<br />".$this->formRow($form->get('porosity_judgement'));
-							echo "<br />".$this->formRow($form->get('local_head_drop'));
-							echo "<br />".$this->formRow($form->get('porosity_info'));
-							echo "<br />".$this->formRow($form->get('file_name'));
-							echo "<br />".$this->formSubmit($form->get('submit'));
-							?>
-		        </div>
-		        <?php  echo $this->form()->closeTag(); ?>
-		        <div class=".col-xs-6 .col-sm-4 .col-lg-4">
-		        			<?php 
-							if ($this->escapeHtml($form->get('file_name')->getValue()) == "") { ?>
-								::no image::
-							<?php } else { ?>
-								<a href="<?php echo $this->basePath() . '/obstructions/' . $this->escapeHtml($form->get('file_name')->getValue());?>" target="_blank">
-									<img style="max-width:400px;" src="<?php echo $this->basePath() . '/obstructions/' . $this->escapeHtml($form->get('file_name')->getValue());?>" />
-								</a>
-							<?php } ?>
-		        </div>
-		      </div>
-			</div>
-		</div>
-	</div>
-</div>
+
+
+<?php
+if ($this->escapeHtml ( $form->get ( 'file_name' )->getValue () ) == "") {
+	?>
+	::no image::
+<?php } else { ?>
+<a
+	href="<?php echo $this->basePath() . '/obstructions/' . $this->escapeHtml($form->get('file_name')->getValue());?>"
+	target="_blank"> <img style="max-width: 400px;"
+	src="<?php echo $this->basePath() . '/obstructions/' . $this->escapeHtml($form->get('file_name')->getValue());?>" />
+</a>
+<?php } ?>
+		   
+		        
