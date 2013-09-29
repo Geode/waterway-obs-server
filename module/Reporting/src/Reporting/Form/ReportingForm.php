@@ -30,25 +30,42 @@ class ReportingForm extends Form
                 'label' => 'y GPS coordinate',
             ),
         ));
+        
         $this->add(array(
-            'name' => 'feature',
-            'type' => 'Text',
-            'options' => array(
-                'label' => 'Category (feature)',
-            ),
+        		'type' => 'Zend\Form\Element\Select',
+        		'name' => 'feature',
+        		'options' => array(
+        				'label' => 'Category',
+        				'value_options' => array(
+        						'UNKNOWN' => 'Unknown',
+        						'WATERFALL' => 'Waterfall',
+        						'WEIR' => 'Weir',
+        						'WILL' => 'Mil',
+        						'LOCK' => 'Lock',
+        						'DAM' => 'Dam',
+        						'BARRAGE' => 'Barrage',
+        				),
+        		)
         ));
+        
+
         $this->add(array(
-			'name' => 'type',
-			'type' => 'Text',
-			'options' => array(
-				'label' => 'Obstruction type (type)',
-			),
-		));
+        		'type' => 'Zend\Form\Element\Select',
+        		'name' => 'type',
+        		'options' => array(
+        				'label' => 'Obstruction type (type)',
+        				'value_options' => array(
+        						'UNKNOWN' => 'Unknown',
+        						'ARTIFICIAL' => 'Artificial',
+        						'NATURAL' => 'Natural',
+        				),
+        		)
+        ));
 		$this->add(array(
 			'name' => 'name',
 			'type' => 'Text',
 			'options' => array(
-				'label' => 'Site name (name)',
+				'label' => 'Site name',
 			),
 		));
 		$this->add(array(
@@ -62,7 +79,7 @@ class ReportingForm extends Form
         		'name' => 'fishpass',
         		'type' => 'CheckBox',
         		'options' => array(
-        				'label' => 'Boolean (fishpass)',
+        				'label' => 'Fishpass present ?',
         		),
         ));
         $this->add(array(
@@ -78,56 +95,113 @@ class ReportingForm extends Form
         		'options' => array(
         				'label' => '(fishpass_info)',
         		),
-        ));        
+        )); 
+
         $this->add(array(
+        		'type' => 'Zend\Form\Element\Select',
         		'name' => 'porosity_sal',
-        		'type' => 'Text',
         		'options' => array(
-        				'label' => ' (porosity_sal)',
-        		),
+        				'label' => 'Passability Salmon',
+        				'value_options' => array(
+        						'UNKNOWN' => 'Unknown',
+        						'COMPLETE_BARRIER' => 'Impassable',
+        						'PARTIAL_BARRIER_LOW_IMPACT' => 'Partial barrier (low impact)',
+        						'PARTIAL_BARRIER_HIGH_IMPACT' => 'Partial barrier (high impact)',
+        						'NO_BARRIER' => 'No Barrier',
+        				),
+        		)
         ));
-		$this->add(array(
-				'name' => 'porosity_trout',
-				'type' => 'Text',
-				'options' => array(
-						'label' => ' (porosity_trout)',
-				),
-		));
-		$this->add(array(
-				'name' => 'porosity_gray',
-				'type' => 'Text',
-				'options' => array(
-						'label' => ' (porosity_gray)',
-				),
-		));
-		$this->add(array(
-				'name' => 'porosity_rlamp',
-				'type' => 'Text',
-				'options' => array(
-						'label' => ' (porosity_rlamp)',
-				),
-		));
-		$this->add(array(
-				'name' => 'porosity_slamp',
-				'type' => 'Text',
-				'options' => array(
-						'label' => ' (porosity_slamp)',
-				),
-		));
-		$this->add(array(
-				'name' => 'porosity_eel',
-				'type' => 'Text',
-				'options' => array(
-						'label' => ' (porosity_eel)',
-				),
-		));
-		$this->add(array(
-				'name' => 'porosity_cyp',
-				'type' => 'Text',
-				'options' => array(
-						'label' => ' (porosity_cyp)',
-				),
-		));   
+
+        $this->add(array(
+        		'type' => 'Zend\Form\Element\Select',
+        		'name' => 'porosity_trout',
+        		'options' => array(
+        				'label' => 'Passability Trout',
+        				'value_options' => array(
+        						'UNKNOWN' => 'Unknown',
+        						'COMPLETE_BARRIER' => 'Impassable',
+        						'PARTIAL_BARRIER_LOW_IMPACT' => 'Partial barrier (low impact)',
+        						'PARTIAL_BARRIER_HIGH_IMPACT' => 'Partial barrier (high impact)',
+        						'NO_BARRIER' => 'No Barrier',
+        				),
+        		)
+        ));
+
+        $this->add(array(
+        		'type' => 'Zend\Form\Element\Select',
+        		'name' => 'porosity_gray',
+        		'options' => array(
+        				'label' => 'Passability Gray',
+        				'value_options' => array(
+        						'UNKNOWN' => 'Unknown',
+        						'COMPLETE_BARRIER' => 'Impassable',
+        						'PARTIAL_BARRIER_LOW_IMPACT' => 'Partial barrier (low impact)',
+        						'PARTIAL_BARRIER_HIGH_IMPACT' => 'Partial barrier (high impact)',
+        						'NO_BARRIER' => 'No Barrier',
+        				),
+        		)
+        ));
+
+        $this->add(array(
+        		'type' => 'Zend\Form\Element\Select',
+        		'name' => 'porosity_rlamp',
+        		'options' => array(
+        				'label' => 'Passability River Lamprey',
+        				'value_options' => array(
+        						'UNKNOWN' => 'Unknown',
+        						'COMPLETE_BARRIER' => 'Impassable',
+        						'PARTIAL_BARRIER_LOW_IMPACT' => 'Partial barrier (low impact)',
+        						'PARTIAL_BARRIER_HIGH_IMPACT' => 'Partial barrier (high impact)',
+        						'NO_BARRIER' => 'No Barrier',
+        				),
+        		)
+        ));
+
+        $this->add(array(
+        		'type' => 'Zend\Form\Element\Select',
+        		'name' => 'porosity_slamp',
+        		'options' => array(
+        				'label' => 'Passability Sea Lamprey',
+        				'value_options' => array(
+        						'UNKNOWN' => 'Unknown',
+        						'COMPLETE_BARRIER' => 'Impassable',
+        						'PARTIAL_BARRIER_LOW_IMPACT' => 'Partial barrier (low impact)',
+        						'PARTIAL_BARRIER_HIGH_IMPACT' => 'Partial barrier (high impact)',
+        						'NO_BARRIER' => 'No Barrier',
+        				),
+        		)
+        ));
+
+        $this->add(array(
+        		'type' => 'Zend\Form\Element\Select',
+        		'name' => 'porosity_eel',
+        		'options' => array(
+        				'label' => 'Passability Juvenile eel',
+        				'value_options' => array(
+        						'UNKNOWN' => 'Unknown',
+        						'COMPLETE_BARRIER' => 'Impassable',
+        						'PARTIAL_BARRIER_LOW_IMPACT' => 'Partial barrier (low impact)',
+        						'PARTIAL_BARRIER_HIGH_IMPACT' => 'Partial barrier (high impact)',
+        						'NO_BARRIER' => 'No Barrier',
+        				),
+        		)
+        ));
+
+        $this->add(array(
+        		'type' => 'Zend\Form\Element\Select',
+        		'name' => 'porosity_cyp',
+        		'options' => array(
+        				'label' => 'Passability Cyprinids and juvenile salmonids',
+        				'value_options' => array(
+        						'UNKNOWN' => 'Unknown',
+        						'COMPLETE_BARRIER' => 'Impassable',
+        						'PARTIAL_BARRIER_LOW_IMPACT' => 'Partial barrier (low impact)',
+        						'PARTIAL_BARRIER_HIGH_IMPACT' => 'Partial barrier (high impact)',
+        						'NO_BARRIER' => 'No Barrier',
+        				),
+        		)
+        ));
+   
         $this->add(array(
         		'name' => 'porosity_judgement',
         		'type' => 'Text',
