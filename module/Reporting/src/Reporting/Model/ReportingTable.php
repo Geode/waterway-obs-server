@@ -57,8 +57,8 @@ class ReportingTable
 	public function saveReporting(Reporting $reporting)
 	{
 		$data = array(
-				'x' => $reporting->x,
-				'y'  => $reporting->y,
+				'location_x' => $reporting->x,
+				'location_y'  => $reporting->y,
 				'feature' => $reporting->feature,
 				'type' => $reporting->type,
 				'name' => $reporting->name,

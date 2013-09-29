@@ -15,9 +15,15 @@ return array(
 	
     'db' => array(
         'driver'         => 'Pdo',
+<<<<<<< HEAD
         'dsn'            => 'pgsql:host=localhost;dbname=water',
         'username'       => 'water',
         'password'       => '',
+=======
+        'dsn'            => 'pgsql:host=localhost;dbname=waterway',
+        'username'       => 'admin',
+        'password'       => 'admin',
+>>>>>>> 762f55ecc157f5f9b69b0f7072f07aeeebc03bb4
     ),
     // Whether or not to enable a configuration cache.
     // If enabled, the merged configuration will be cached and used in
