@@ -9,7 +9,12 @@ $this->form($form,\TwbBundle\Form\View\Helper\TwbBundleForm::LAYOUT_HORIZONTAL);
 $form->setAttribute('action', $this->url('reporting', array('action' => 'add')));
 
 
+$form->setAttribute('action', $this->url('reporting', array('action' => 'add')));
+
+$form->prepare();
+echo $this->form()->openTag($form);
 echo $this->formCollection($form);
+echo $this->form()->closeTag();
 
 ?>
 
