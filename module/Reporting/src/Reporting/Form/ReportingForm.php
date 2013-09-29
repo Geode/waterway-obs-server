@@ -70,7 +70,7 @@ class ReportingForm extends Form
 		));
 		$this->add(array(
 			'name' => 'location_info',
-			'type' => 'Text',
+			'type' => 'Textarea',
 			'options' => array(
 				'label' => 'Location (location_info)',
 			),
@@ -91,7 +91,7 @@ class ReportingForm extends Form
         ));
         $this->add(array(
         		'name' => 'fishpass_info',
-        		'type' => 'Text',
+        		'type' => 'Textarea',
         		'options' => array(
         				'label' => '(fishpass_info)',
         		),
@@ -218,7 +218,7 @@ class ReportingForm extends Form
         ));
         $this->add(array(
         		'name' => 'porosity_info',
-        		'type' => 'Text',
+        		'type' => 'Textarea',
         		'options' => array(
         				'label' => ' (porosity_info)',
         		),
