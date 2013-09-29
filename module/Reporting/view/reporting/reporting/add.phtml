@@ -4,54 +4,12 @@ $this->headTitle($title);
 ?>
 <h1><?php echo $this->escapeHtml($title); ?></h1>
 <?php
+
+$this->form($form,\TwbBundle\Form\View\Helper\TwbBundleForm::LAYOUT_HORIZONTAL);
 $form->setAttribute('action', $this->url('reporting', array('action' => 'add')));
+
+
+echo $this->formCollection($form);
+
 ?>
-<div class="row">
-    <div class="col">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title"><?php echo $this->translate('Obstruction'); ?> :</h3>
-            </div>
-            <div class="panel-body">
-            	<table>
-            		<tr>
-            			<td>
-<?php 
-$form->prepare();
-echo $this->form()->openTag($form);
-echo "<br />".$this->formHidden($form->get('id'));
-echo "<br />".$this->formRow($form->get('x'));
-echo "<br />".$this->formRow($form->get('y'));
-echo "<br />".$this->formRow($form->get('feature'));
-echo "<br />".$this->formRow($form->get('type'));
-echo "<br />".$this->formRow($form->get('name'));
-echo "<br />".$this->formRow($form->get('location_info'));
-echo "<br />".$this->formRow($form->get('fishpass'));
-echo "<br />".$this->formRow($form->get('fishpasstype'));
-echo "<br />".$this->formRow($form->get('fishpass_info'));
-echo "<br />".$this->formRow($form->get('porosity_sal'));
-echo "<br />".$this->formRow($form->get('porosity_trout'));
-?>
-</td><td>
-<?php 
-echo "<br />".$this->formRow($form->get('porosity_gray'));
-echo "<br />".$this->formRow($form->get('porosity_rlamp'));
-echo "<br />".$this->formRow($form->get('porosity_slamp'));
-echo "<br />".$this->formRow($form->get('porosity_eel'));
-echo "<br />".$this->formRow($form->get('porosity_cyp'));
-echo "<br />".$this->formRow($form->get('porosity_judgement'));
-echo "<br />".$this->formRow($form->get('local_head_drop'));
-echo "<br />".$this->formRow($form->get('porosity_info'));
-echo "<br />".$this->formRow($form->get('image-file'));
-echo "<br />".$this->formSubmit($form->get('submit'));
-echo "<br />".$this->formSubmit($form->get('submit-json'));
-echo $this->form()->closeTag();
-?>
-            			</td>
-            		</tr>	
-            	</table>
-			</div>
-		</div>
-	</div>
-</div>
-<?php 
+

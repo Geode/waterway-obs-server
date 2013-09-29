@@ -48,7 +48,7 @@ class ReportingForm extends Form
 			'name' => 'name',
 			'type' => 'Text',
 			'options' => array(
-				'label' => '(name)',
+				'label' => 'Site name (name)',
 			),
 		));
 		$this->add(array(

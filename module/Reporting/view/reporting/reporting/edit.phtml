@@ -5,13 +5,10 @@ $this->headTitle ( $title );
 <h1><?php echo $this->escapeHtml($title); ?></h1>
 
 <?php
-echo $this->partial ( 'partial/form-partial', array (
-		'form' => $this->form,
-		'url' => $this->url ( 'reporting', array (
-				'action' => 'edit',
-				'id' => $this->id 
-		) ) 
-) );
+
+$this->form($form,\TwbBundle\Form\View\Helper\TwbBundleForm::LAYOUT_HORIZONTAL);
+
+echo $this->formCollection($form);
 ?>
 
 
